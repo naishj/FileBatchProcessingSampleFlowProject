@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<!-- 
+
+
+
+(C) COPYRIGHT International Business Machines Corp., 2008
+
+
+
+All Rights Reserved * Licensed Materials - Property of IBM
+
+
+
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="../../com.ibm.etools.msgbroker.samplesgallery/scripts/samples.js" type="text/javascript" xml:space="preserve"> </script>
+<script src="../../org.eclipse.help/livehelp.js" type="text/javascript" xml:space="preserve"> </script>
+<link href="../../com.ibm.etools.mft.doc/bip4.css" rel="stylesheet" type="text/css" />
+<link href="../../com.ibm.etools.msgbroker.samplesgallery/css/gallery_common.css" rel="stylesheet" type="text/css" />
+<link href="../../com.ibm.etools.msgbroker.samplesgallery/css/gallery_messagebroker.css" rel="stylesheet" type="text/css" />
+ 
+ <title>About the Batch Processing sample</title>
+</head>
+<body class="sampcont">
+<h1>About the Batch Processing sample</h1>
+<p>This sample demonstrates how to use the FileInput and FileOutput nodes to append 
+files into a single output file.</p>
+<p> This sample demonstrates the following tasks:</p>
+<ul>
+  <li>Monitoring an input directory for files by using a wildcard match on the file name</li>
+  <li>Creating an archive of the files read by the FileInput node with a time stamp</li>
+  <li>Appending different files to one output file</li>
+  <li>Using a delimiter on the file output</li>
+  <li>Transferring a file to a different local directory</li>
+</ul>
+<p>The sample is based on the following scenario:</p>
+<p>Each branch office records their postage usage in a text file on a workstation. 
+This text file is transferred to the head office input directory, 
+where it is appended to a master file each day. 
+Once a day the master file is transferred to the head office output directory.</p>
+<p>The scenario is implemented by using the messages flows described in the following sections.</p>
+
+
+<h3>FileBatchProcessingFlowSample_Branch message flow</h3>
+<p>The FileInput node monitors a directory where branch offices 
+each send a text file that has a record of their
+daily postal usage. The FileOutput node appends each branch record to a 
+master file held in the head office
+input directory. This file is held in the <span class="filepath">mqsitransit</span> 
+subdirectory until the End of Data
+message is received by the FileOutput node. 
+The <span class="uicontrol">End of Data</span> terminal of the
+FileInput node is connected to a Compute node. 
+Three branch offices send postage data, and the Compute node counts the number of messages
+through the flow. 
+When the third record is read by the Compute node, 
+it propagates an End of Data message to the <span class="uicontrol">Finish File</span>
+terminal on the FileOutput node.</p>
+<p>The following diagram shows the FileBatchProcessingFlowSample_Branch message flow:</p>
+<p><img border="0" src="FileBatchProcessingFlow_Branch.gif"
+	width="482" height="178" alt="screen capture of the FileBatchProcessingFlowSample_Branch message flow."/></p>
+
+
+<h3>FileBatchProcessingFlowSample_HOffice message flow</h3>
+<p>A FileInput node monitors the head office input directory. The
+FileInput node is connected to a FileOutput node and writes the master file to the 
+head office output directory.</p>
+<p>The following diagram shows the FileBatchProcessingFlowSample_HOffice message flow:</p>
+<p><img border="0" src="FileBatchProcessingFlow_HOffice.gif"
+	width="384" height="108" alt="Screen capture of the FileBatchProcessingFlowSample_HOffice message flow."/></p>
+ 
+<p class="samplehome"><a href="overview.htm">Back to sample home 
+</a></p>
+</body>
+</html>

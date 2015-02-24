@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<!-- 
+
+(C) COPYRIGHT International Business Machines Corp., 2008, 2011
+
+All Rights Reserved * Licensed Materials - Property of IBM
+
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="../../com.ibm.etools.msgbroker.samplesgallery/scripts/samples.js" type="text/javascript" xml:space="preserve"> </script>
+<script src="../../org.eclipse.help/livehelp.js" type="text/javascript" xml:space="preserve"> </script>
+<link href="../../com.ibm.etools.mft.doc/bip4.css" rel="stylesheet" type="text/css" />
+<link href="../../com.ibm.etools.msgbroker.samplesgallery/css/gallery_common.css" rel="stylesheet" type="text/css" />
+<link href="../../com.ibm.etools.msgbroker.samplesgallery/css/gallery_messagebroker.css" rel="stylesheet" type="text/css" />
+ 
+ <title>Running the Batch Processing sample</title>
+</head>
+<body class="sampcont">
+<h1>Running the Batch Processing sample</h1>
+ 
+<p>Before you can run the sample you must have completed the set up steps, 
+see <a href="setup.htm">Setting up the Batch Processing sample</a>, 
+and imported and deployed the sample, see <a href="overview.htm">Batch Processing sample</a>.</p>
+<p>
+<b>Note:</b></p>
+
+<ul>
+<li>If you do not complete the set up steps first, the sample will fail to
+initialize correctly and the files will not be read.</li>
+<li>The FileInput nodes poll the input directory every 5 seconds, 
+therefore, if you type quickly, the expected output might not be visible. 
+Refreshing the directory list 5 seconds later shows the correct result.</li>
+
+</ul>
+
+<p>If you encounter any problems when you run the sample, 
+see <a href="../../com.ibm.etools.mft.doc/bu43950_.htm">Resolving problems when running samples</a> 
+in the IBM Integration Bus documentation.</p>
+
+<p>To run the sample:</p>
+<ol>
+
+
+
+<li>Stop the message flow. Use the following instructions to stop the
+FileBatchProcessingSample_HOffice message flow and the FileBatchProcessingSample_Branch message flow: 
+<ol>
+  <li>In the IBM Integration  Toolkit, switch to the Integration Nodes view.</li>
+  <li>Right-click the deployed message flow, FileBatchProcessingSample_HOffice, click 
+<span class="uicontrol">Stop</span>. 
+The message flow indicates that the message flow has stopped. </li>
+<li>Repeat the previous steps for FileBatchProcessingSample_Branch message flow.</li>
+</ol>
+</li>
+
+
+<li>Copy the file from the Southampton branch to the <span class="filepath">branch_out</span> 
+subdirectory:
+
+<ol>
+<li>Save the contents of the <a href="southampton_branch.txt">southampton_branch.txt</a> file 
+as a file called <span class="filepath">southampton_branch.txt</span> in 
+the <span class="filepath">branch_out</span> subdirectory
+that you created when you set up the sample.
+
+The file contains the following data: 
+<pre>Southampton postage parcel 23 letter 56 </pre>
+</li>
+  <li>Restart the FileBatchProcessingSample_Branch message flow, the content of the 
+  <span class="filepath">southampton_branch.txt</span> input file is transferred to
+the <span class="filepath">mqsitransit</span> subdirectory
+in <span class="filepath">c:\MQSIFileInput\hoffice_in</span> or 
+<span class="filepath">/tmp/MQSIFileInput/hoffice_in</span>. 
+Look at the <span class="filepath">hoffice_in</span> directory or the <span class="filepath">mqsitransit</span> 
+subdirectory and check the contents of the <span class="filepath">hoffice_in.txt</span> file. 
+This file contains the Southampton postage details from
+the input file.</li>
+  <li>Look at the <span class="filepath">branch_out</span> subdirectory. 
+  The <span class="filepath">southampton_branch.txt</span> file 
+     is no longer in the directory, because in the FILE_BRANCH FileInput node 
+     the <span class="uicontrol">Action on successful processing</span> 
+property is set to <span class="filepath">Delete</span>.</li>
+</ol></li>
+
+
+<li>
+Copy the file from the Winchester branch to the <span class="filepath">branch_out</span> subdirectory:
+
+<ol>
+  <li> Save the contents of the <a href="winchester_branch.txt">winchester_branch.txt</a>
+ file as a file called <span class="filepath">winchester_branch.txt</span> 
+ in the <span class="filepath">branch_out</span> subdirectory that
+you created when you set up the sample. 
+<p><b>Note:</b></p>
+<p> Because the message flow is running, the file
+     is picked up and deleted almost immediately, so you might not see it in the
+     <span class="filepath">branch_out</span> subdirectory.</p>
+</li>
+  <li>Look at the <span class="filepath">mqsitransit</span> 
+subdirectory and look at the contents of the <span class="filepath">hoffice_in.txt</span> file. 
+The contents of the <span class="filepath">winchester_branch.txt</span> file 
+are appended to the <span class="filepath">hoffice_in.txt</span> file.</li>
+</ol>
+   </li>
+ 
+ 
+<li>Copy the file from the Portsmouth branch 
+       
+to the <span class="filepath">branch_out</span> subdirectory:
+
+<ol>
+  <li>Save the contents of the <a href="portsmouth_branch.txt">portsmouth_branch.txt</a> file
+  as a file called <span class="filepath">portsmouth_branch.txt</span> in 
+the <span class="filepath">branch_out</span> subdirectory that you
+created when you set up the sample. 
+<p><b>Note:</b></p>
+<p> Because the message flow is running, the file
+     is picked up and deleted almost immediately, so you might not see it in the
+     <span class="filepath">branch_out</span> subdirectory.</p>
+	</li>
+  <li>Look at the <span class="filepath">mqsitransit</span> subdirectory.
+This directory is empty because this file was the third record received. The Compute node sends
+an End of Data message to the FileOutput node. The End of Data message closes the file and 
+moves it to the output directory specified in the FileOutput node, 
+<span class="filepath">c:\MQSIFileInput\hoffice_in</span>
+or <span class="filepath">/tmp/MQSIFileInput/hoffice_in</span>.</li>
+  <li>Look at the <span class="filepath">hoffice_in.txt</span> file in the 
+  <span class="filepath">hoffice_in</span> subdirectory.       
+  This file contains the postage data from each branch:</li>
+</ol>
+<pre>Southampton postage parcel 23 letter 56 
+Winchester postage parcel 27 letter 30 
+Portsmouth postage parcel 12 letter 84 </pre>  
+</li>
+                           
+    
+<li>Start the FileBatchProcessingSample_HOffice
+message flow to transfer
+the file from the head office input directory to the head office output
+directory:<ol>
+  <li>   
+In the Integration Nodes view, right-click the deployed message flow, FileBatchProcessingSample_HOffice,
+ click <span class="uicontrol">Start</span>.</li></ol>
+</li>
+ <li>Check that the postage details have been transferred to the head office output
+directory:<ol>
+  <li>  Check that the <span class="filepath">hoffice_in</span> subdirectory is empty. 
+  The FileBatchProcessingSample_HOffice message flow reads
+		the <span class="filepath">hoffice_in.txt</span> file from the 
+		<span class="filepath">hoffice_in</span> subdirectory. 
+		The message flow also creates an
+		archive file with a timestamp in 
+		<span class="filepath">c:\MQSIFileInput\hoffice_in\mqsiarchive</span> or
+		<span class="filepath">\tmp\MQSIFileInput\hoffice_in\mqsiarchive</span>. </li>
+		<li>Look in the <span class="filepath">mqsiarchive</span> subdirectory and 
+		look at the contents of the file with the time stamp. 
+		This file contains the branch office postage details from the
+three branches that were created by the FileOutput node in the 
+FileBatchProcessingSample_Branch message flow.</li>
+		<li>Look at the <span class="filepath">hoffice_out</span> subdirectory, 
+		and look at the contents of <span class="filepath">hoffice_out.txt</span>. 
+		This file contains the following branch office postage details:</li></ol>
+		<pre>Southampton postage parcel 23 letter 56 
+Winchester postage parcel 27 letter 30 
+Portsmouth postage parcel 12 letter 84  </pre>
+  </li>
+</ol>
+
+<p class="samplehome"><a href="overview.htm">Back to sample home</a></p>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<!-- 
+
+(C) COPYRIGHT International Business Machines Corp., 2008, 2011
+
+All Rights Reserved * Licensed Materials - Property of IBM
+
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="../../com.ibm.etools.msgbroker.samplesgallery/scripts/samples.js" type="text/javascript" xml:space="preserve"> </script>
+<script src="../../org.eclipse.help/livehelp.js" type="text/javascript" xml:space="preserve"> </script>
+<link href="../../com.ibm.etools.mft.doc/bip4.css" rel="stylesheet" type="text/css" />
+<link href="../../com.ibm.etools.msgbroker.samplesgallery/css/gallery_common.css" rel="stylesheet" type="text/css" />
+<link href="../../com.ibm.etools.msgbroker.samplesgallery/css/gallery_messagebroker.css" rel="stylesheet" type="text/css" />
+ 
+ <title>Setting up the Batch Processing sample</title>
+</head>
+<body>
+<h1>Setting up the Batch Processing sample</h1>
+<p>You must set a directory to read or write a file to when you configure a 
+FileInput or FileOutput node. In the nodes
+you can either set an absolute path or set a relative path. If you set
+a relative path, you must use the 
+environment variable MQSI_FILENODES_ROOT_DIRECTORY to set the directory root.
+ 
+</p>
+<p>The root directory that is used in this sample is:</p>
+<ul>
+  <li>On Windows: <span class="filepath">c:\MQSIFileInput</span> </li>
+  <li>On Linux: <span class="filepath">/tmp/MQSIFileInput</span> </li>
+</ul>
+
+<p>
+<b>Note:</b> You can choose a different root directory and set the environment
+variable MQSI_FILENODES_ROOT_DIRECTORY
+ to this directory instead.</p>
+
+<p>Two message flows are used in this sample. Within each message flow, the
+FileInput and FileOutput nodes have different relative paths set:</p>
+<ul>
+<li>FileBatchProcessingSample_Branch message flow:<ul>
+  <li> FileInput node FILE_BRANCH : Set the <span class="uicontrol">Input Directory</span> 
+  property to relative path <span class="filepath">branch_out</span> </li>
+  <li> FileOutput node FILE_HOFFICE: Set the <span class="uicontrol">Directory</span> 
+  property to relative path <span class="filepath">hoffice_in</span></li>
+</ul></li>
+<li>FileBatchProcessingSample_HOffice message flow:<ul>
+  <li> FileInput node FILE_HOFFICE_IN : Set the <span class="uicontrol">Input Directory</span> 
+property to relative path <span class="filepath">hoffice_in</span> </li>
+  <li> FileOutput node FILE_HOFFICE_OUT : Set the <span class="uicontrol">Directory</span> 
+  property to relative path <span class="filepath">hoffice_out</span> </li>
+</ul></li>
+</ul>
+<p>To set up the Batch Processing sample:</p>
+<ol>
+<li>Create the following directories:
+  <p>
+ On  Windows:</p>
+ <ul>
+  <li> <span class="filepath">c:\MQSIFileInput\branch_out</span></li>
+  <li> <span class="filepath">c:\MQSIFileInput\hoffice_in</span></li>
+  <li> <span class="filepath">c:\MQSIFileInput\hoffice_out</span></li>
+</ul>
+
+
+<p>On Linux:</p>
+<ul>
+  <li><span class="filepath">/tmp/MQSIFileInput/branch_out</span></li>
+  <li><span class="filepath">/tmp/MQSIFileInput/hoffice_in</span></li>
+  <li><span class="filepath">/tmp/MQSIFileInput/hoffice_out</span></li>
+</ul></li>
+  
+<li>Ensure that your default integration node has been created.</li> 
+<li>Set the environment variable MQSI_FILENODES_ROOT_DIRECTORY to the root directory.
+  <ol>
+    <li>Follow the instructions at 
+      <a href="../../com.ibm.etools.mft.doc/an26190_.htm">Setting up a command environment</a> to create a command environment 
+      and a command file that contains the following line (ensuring that there is no white space around the equal (=) sign):
+      <ul>
+        <li>On Windows:
+         <pre>SET MQSI_FILENODES_ROOT_DIRECTORY=c:\MQSIFileInput</pre>
+        </li>
+        <li>On Linux:
+          <pre>export MQSI_FILENODES_ROOT_DIRECTORY=&quot;/tmp/MQSIFileInput&quot;</pre>
+        </li>
+      </ul> 
+    </li>
+    <li>Stop and restart your integration node.  See <a href="../../com.ibm.etools.mft.doc/an04011_.htm">Starting and stopping a broker</a>.
+    </li>
+  </ol>
+</li> 
+</ol> 
+<p class="samplehome"><a href="overview.htm">Back to sample home</a></p>
+<p></p>
+</body>
+</html>
